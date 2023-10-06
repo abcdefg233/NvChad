@@ -1,19 +1,54 @@
 return
 {
  {
+  "lukas-reineke/indent-blankline.nvim",
+  version = "*",
+  main = "ibl",
+  opts = {},
+  init = function()
+   local highlight = {
+    "RainbowRed",
+    "RainbowYellow",
+    "RainbowBlue",
+    "RainbowOrange",
+    "RainbowGreen",
+    "RainbowViolet",
+    "RainbowCyan",
+   }
+   local hooks = require"ibl.hooks"
+   hooks.register(hooks.type.HIGHLIGHT_SETUP,function()
+    vim.api.nvim_set_hl(0,"RainbowRed",   {fg = "#E06C75"})
+    vim.api.nvim_set_hl(0,"RainbowYellow",{fg = "#E5C07B"})
+    vim.api.nvim_set_hl(0,"RainbowBlue",  {fg = "#61AFEF"})
+    vim.api.nvim_set_hl(0,"RainbowOrange",{fg = "#D19A66"})
+    vim.api.nvim_set_hl(0,"RainbowGreen", {fg = "#98C379"})
+    vim.api.nvim_set_hl(0,"RainbowViolet",{fg = "#C678DD"})
+    vim.api.nvim_set_hl(0,"RainbowCyan",  {fg = "#56B6C2"})
+   end)
+   require("ibl").setup{
+    indent = {highlight = highlight,char = ""},
+    whitespace = {
+     highlight = highlight,
+     -- remove_blankline_trail = false,
+    },
+    scope = {enabled = false},
+   }
+  end,
+ },
+ {
   "echasnovski/mini.nvim",
-  version="*",
-  init=function()
+  version = "*",
+  init = function()
    -- require("mini.ai").setup({})
    require("mini.align").setup(
     {
      -- Module mappings. Use `''` (empty string) to disable one.
-     mappings={
-      start="ga",
-      start_with_preview="gA",
+     mappings = {
+      start = "ga",
+      start_with_preview = "gA",
      },
      -- Modifiers changing alignment steps and/or options
-     modifiers={
+     modifiers = {
       -- Main option modifiers
       --    ['s']    = <function: enter split pattern>,
       --    ['j']    = <function: choose justify side>,
@@ -31,22 +66,22 @@ return
       --    [' ']    = <function: enhanced setup for ' '>,
      },
      -- Default options controlling alignment process
-     options={
-      split_pattern="",
-      justify_side="left",
-      merge_delimiter="",
+     options = {
+      split_pattern = "",
+      justify_side = "left",
+      merge_delimiter = "",
      },
      -- Default steps performing alignment (if `nil`, default is used)
-     steps={
-      pre_split={},
-      split=nil,
-      pre_justify={},
-      justify=nil,
-      pre_merge={},
-      merge=nil,
+     steps = {
+      pre_split = {},
+      split = nil,
+      pre_justify = {},
+      justify = nil,
+      pre_merge = {},
+      merge = nil,
      },
      -- Whether to disable showing non-error feedback
-     silent=false,
+     silent = false,
     }
    )
    -- require("mini.animate").setup({})
@@ -63,20 +98,20 @@ return
      -- - <options> - table overriding target options.
      --
      -- See `:h MiniBracketed.config` for more info.
-     buffer    ={suffix="b",options={}},
-     comment   ={suffix="c",options={}},
-     conflict  ={suffix="x",options={}},
-     diagnostic={suffix="d",options={}},
-     file      ={suffix="f",options={}},
-     indent    ={suffix="i",options={}},
-     jump      ={suffix="j",options={}},
-     location  ={suffix="l",options={}},
-     oldfile   ={suffix="o",options={}},
-     quickfix  ={suffix="q",options={}},
-     treesitter={suffix="t",options={}},
-     undo      ={suffix="u",options={}},
-     window    ={suffix="w",options={}},
-     yank      ={suffix="y",options={}},
+     buffer     = {suffix = "b",options = {}},
+     comment    = {suffix = "c",options = {}},
+     conflict   = {suffix = "x",options = {}},
+     diagnostic = {suffix = "d",options = {}},
+     file       = {suffix = "f",options = {}},
+     indent     = {suffix = "i",options = {}},
+     jump       = {suffix = "j",options = {}},
+     location   = {suffix = "l",options = {}},
+     oldfile    = {suffix = "o",options = {}},
+     quickfix   = {suffix = "q",options = {}},
+     treesitter = {suffix = "t",options = {}},
+     undo       = {suffix = "u",options = {}},
+     window     = {suffix = "w",options = {}},
+     yank       = {suffix = "y",options = {}},
     }
    )
    -- require("mini.bufremove").setup({})
@@ -96,71 +131,71 @@ return
     -- Function producing jump spots (byte indexed) for a particular line.
     -- For more information see |MiniJump2d.start|.
     -- If `nil` (default) - use |MiniJump2d.default_spotter|
-    spotter=nil,
+    spotter = nil,
     -- Characters used for labels of jump spots (in supplied order)
-    labels="12qwaszx34erdfcv56tyghbn78uijkm,90opl;./-=[]'\\QWASZXERDFCVTYGHBNUIJKMLOP",
+    labels = "12qwaszx34erdfcv56tyghbn78uijkm,90opl;./-=[]'\\QWASZXERDFCVTYGHBNUIJKMLOP",
     -- Options for visual effects
-    view={
+    view = {
      -- Whether to dim lines with at least one jump spot
-     dim=false,
+     dim = false,
      -- How many steps ahead to show. Set to big number to show all steps.
-     n_steps_ahead=0,
+     n_steps_ahead = 0,
     },
     -- Which lines are used for computing spots
-    allowed_lines={
-     blank=true,         -- Blank line (not sent to spotter even if `true`)
-     cursor_before=true, -- Lines before cursor line
-     cursor_at=true,     -- Cursor line
-     cursor_after=true,  -- Lines after cursor line
-     fold=true,          -- Start of fold (not sent to spotter even if `true`)
+    allowed_lines = {
+     blank = true,         -- Blank line (not sent to spotter even if `true`)
+     cursor_before = true, -- Lines before cursor line
+     cursor_at = true,     -- Cursor line
+     cursor_after = true,  -- Lines after cursor line
+     fold = true,          -- Start of fold (not sent to spotter even if `true`)
     },
     -- Which windows from current tabpage are used for visible lines
-    allowed_windows={
-     current=true,
-     not_current=true,
+    allowed_windows = {
+     current = true,
+     not_current = true,
     },
     -- Functions to be executed at certain events
-    hooks={
-     before_start=nil, -- Before jump start
-     after_jump=nil,   -- After jump was actually done
+    hooks = {
+     before_start = nil, -- Before jump start
+     after_jump = nil,   -- After jump was actually done
     },
     -- Module mappings. Use `''` (empty string) to disable one.
-    mappings={
-     start_jumping="<CR>",
+    mappings = {
+     start_jumping = "<CR>",
     },
     -- Whether to disable showing non-error feedback
-    silent=false,
+    silent = false,
    })
    -- require("mini.map").setup({})
    -- require("mini.misc").setup({})
    require("mini.move").setup({ --Alt键挪动选择文本
-    mappings={
+    mappings = {
      -- Move visual selection in Visual mode. Defaults are Alt (Meta) + hjkl.
-     left="<M-h>",
-     right="<M-l>",
-     down="<M-j>",
-     up="<M-k>",
-     line_left="<M-h>",
-     line_right="<M-l>",
-     line_down="<M-j>",
-     line_up="<M-k>",
+     left = "<M-h>",
+     right = "<M-l>",
+     down = "<M-j>",
+     up = "<M-k>",
+     line_left = "<M-h>",
+     line_right = "<M-l>",
+     line_down = "<M-j>",
+     line_up = "<M-k>",
     },
-    options={
+    options = {
      -- Automatically reindent selection during linewise vertical move
-     reindent_linewise=true,
+     reindent_linewise = true,
     },
    })
    require("mini.operators").setup({
-    evaluate={prefix="g=",func=nil},
-    exchange={prefix="gx",reindent_linewise=true},
-    multiply={prefix="gm",func=nil},
-    replace={prefix="gr",reindent_linewise=true},
-    sort={prefix="gs",func=nil},
+    evaluate = {prefix = "g=",func = nil},
+    exchange = {prefix = "gx",reindent_linewise = true},
+    multiply = {prefix = "gm",func = nil},
+    replace = {prefix = "gr",reindent_linewise = true},
+    sort = {prefix = "gs",func = nil},
    }) --
    -- require("mini.pairs").setup({})
    -- require("mini.sessions").setup({})
    require("mini.splitjoin").setup({
-    mappings={toggle="<leader>po"},
+    mappings = {toggle = "<leader>po"},
    }) --拆元素
    -- require("mini.starter").setup({}) --开始菜单
    -- require("mini.statusline").setup({})
@@ -172,27 +207,27 @@ return
  },
  {
   "abcdefg233/fontresizer.nvim",
-  init=function()
+  init = function()
    require("fontresizer").setup({
     default_size = 10,
-    change_up=1,
-    change_down=-1,
-    maximum = 30,
-    minimum = 2,
+    change_up = 2,
+    change_down = -2,
+    maximum = 18,
+    minimum = 6,
    })
   end,
  },
  {
   "CRAG666/code_runner.nvim",
-  config=true,
-  init=function()
+  config = true,
+  init = function()
    require("code_runner").setup(
     {
-     filetype=
+     filetype =
      {
-      lua=
+      lua =
       {
-       "echo $dir$fileName",
+       "lua $dir$fileName",
       },
      },
     })
@@ -200,18 +235,19 @@ return
  },
  {
   "neovim/nvim-lspconfig",
-  config=function()
+  config = function()
    require("lspconfig").lua_ls.setup{
-    settings={
-     Lua=require"custom.configs.luals",
+    settings = {
+     Lua = require"custom.configs.luals",
     },
    }
   end,
  },
+ -- Highly experimental plugin that completely replaces the UI for messages, cmdline and the popupmenu.
  {
   "folke/noice.nvim",
-  event="VeryLazy",
-  dependencies={
+  event = "VeryLazy",
+  dependencies = {
    -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
    "MunifTanjim/nui.nvim",
    -- OPTIONAL:
@@ -219,40 +255,56 @@ return
    --   If not available, we use `mini` as the fallback
    "rcarriga/nvim-notify",
   },
-  init=function()
-   require("noice").setup({
-     lsp = {
-       -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
-       override = {
-         ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-         ["vim.lsp.util.stylize_markdown"] = true,
-         ["cmp.entry.get_documentation"] = true,
-       },
+  opts = {
+   lsp = {
+    override = {
+     ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+     ["vim.lsp.util.stylize_markdown"] = true,
+     ["cmp.entry.get_documentation"] = true,
+    },
+   },
+   routes = {
+    {
+     filter = {
+      event = "msg_show",
+      any = {
+       {find = "%d+L, %d+B"},
+       {find = "; after #%d+"},
+       {find = "; before #%d+"},
+      },
      },
-     -- you can enable a preset for easier configuration
-     presets = {
-       bottom_search = true, -- use a classic bottom cmdline for search
-       command_palette = true, -- position the cmdline and popupmenu together
-       long_message_to_split = true, -- long messages will be sent to a split
-       inc_rename = false, -- enables an input dialog for inc-rename.nvim
-       lsp_doc_border = false, -- add a border to hover docs and signature help
-     },
-   })
-  end,
+     view = "mini",
+    },
+   },
+   presets = {
+    bottom_search = true,
+    command_palette = true,
+    long_message_to_split = true,
+    inc_rename = true,
+   },
+  },
+  keys = {
+   {"<S-Enter>",  function() require("noice").redirect(vim.fn.getcmdline()) end,                mode = "c",                desc = "Redirect Cmdline"},
+   {"<leader>snl",function() require("noice").cmd("last") end,                                  desc = "Noice Last Message"},
+   {"<leader>snh",function() require("noice").cmd("history") end,                               desc = "Noice History"},
+   {"<leader>sna",function() require("noice").cmd("all") end,                                   desc = "Noice All"},
+   {"<leader>snd",function() require("noice").cmd("dismiss") end,                               desc = "Dismiss All"},
+   {"<c-f>",      function() if not require("noice.lsp").scroll(4) then return "<c-f>" end end, silent = true,             expr = true,             desc = "Scroll forward", mode = {"i","n","s"}},
+   {"<c-b>",      function() if not require("noice.lsp").scroll(-4) then return "<c-b>" end end,silent = true,             expr = true,             desc = "Scroll backward",mode = {"i","n","s"}},
+  },
  },
  {
   "folke/flash.nvim",
-  event="VeryLazy",
-  vscode=true,
+  event = "VeryLazy",
+  vscode = true,
   ---@type Flash.Config
-  opts={},
-  -- stylua: ignore
-  keys={
-   {"s",    mode={"n","x","o"},function() require("flash").jump() end,             desc="Flash"},
-   {"S",    mode={"n","o","x"},function() require("flash").treesitter() end,       desc="Flash Treesitter"},
-   {"r",    mode="o",          function() require("flash").remote() end,           desc="Remote Flash"},
-   {"R",    mode={"o","x"},    function() require("flash").treesitter_search() end,desc="Treesitter Search"},
-   {"<c-s>",mode={"c"},        function() require("flash").toggle() end,           desc="Toggle Flash Search"},
+  opts = {},
+  keys = {
+   {"s",    mode = {"n","x","o"},function() require("flash").jump() end,             desc = "Flash"},
+   {"S",    mode = {"n","o","x"},function() require("flash").treesitter() end,       desc = "Flash Treesitter"},
+   {"r",    mode = "o",          function() require("flash").remote() end,           desc = "Remote Flash"},
+   {"R",    mode = {"o","x"},    function() require("flash").treesitter_search() end,desc = "Treesitter Search"},
+   {"<c-s>",mode = {"c"},        function() require("flash").toggle() end,           desc = "Toggle Flash Search"},
   },
  },
 }

@@ -1,5 +1,5 @@
-local nowait={nowait=true}
-local noremap_silent={noremap=true,silent=true}
+local nowait = {nowait = true}
+local noremap_silent = {noremap = true,silent = true}
 return
 {
  -- In order to disable a default keymap, use
@@ -9,47 +9,47 @@ return
  --       ["<C-a>"] = ""
  --   }
  -- }
- FontResizer=
+ FontResizer =
  {
-  n=
+  n =
   {
-   ["<A-Up>"]={"<cmd>:FontResizer Change Up<CR>","FontResizer Change Up",noremap_silent},
-   ["<A-Down>"]={"<cmd>:FontResizer Change Down<CR>","FontResizer Change Down",noremap_silent},
-   ["<C-ScrollWheelUp>"]={"<cmd>:FontResizer Change Up<CR>","FontResizer Change Up",noremap_silent},
-   ["<C-ScrollWheelDown>"]={"<cmd>:FontResizer Change Down<CR>","FontResizer Change Down",noremap_silent},
-   ["<A-0>"]={"<cmd>:FontResizer Set Default<CR>","FontResizer Set Default",noremap_silent},
-  }
+   ["<A-Up>"] = {"<cmd>:FontResizer Change Up<CR>","FontResizer Change Up",noremap_silent},
+   ["<A-Down>"] = {"<cmd>:FontResizer Change Down<CR>","FontResizer Change Down",noremap_silent},
+   ["<C-ScrollWheelUp>"] = {"<cmd>:FontResizer Change Up<CR>","FontResizer Change Up",noremap_silent},
+   ["<C-ScrollWheelDown>"] = {"<cmd>:FontResizer Change Down<CR>","FontResizer Change Down",noremap_silent},
+   ["<A-0>"] = {"<cmd>:FontResizer Set Default<CR>","FontResizer Set Default",noremap_silent},
+  },
  },
 
- CodeRunner=
+ CodeRunner =
  {
-  n=
+  n =
   {
-   ["<leader>re"]={":RunCode<CR>","Runner-RunCode",nowait},
-   ["<leader>rw"]={":RunFile<CR>","Runner-RunFile",nowait},
-   ["<leader>rq"]={":RunClose<CR>","Runner-RunClose",nowait},
-  }
+   ["<leader>re"] = {":RunCode<CR>","Runner-RunCode",nowait},
+   ["<leader>rw"] = {":RunFile<CR>","Runner-RunFile",nowait},
+   ["<leader>rq"] = {":RunClose<CR>","Runner-RunClose",nowait},
+  },
  },
 
- abc=
+ abc =
  {
-  n=
+  n =
   {
-   ["<leader>lua"]={":luafile %<CR>","Run this file as Lua"},
-   ["<leader>fm"]={function() vim.lsp.buf.format{async=true} end,"LSP formatting"},
-   ["<C-d><C-w>"]={"<cmd>:lua MiniTrailspace.trim()<CR>","Trim",nowait},
+   ["<leader>lua"] = {":luafile %<CR>","Run this file as Lua"},
+   ["<leader>fm"] = {function() vim.lsp.buf.format{async = true} end,"LSP formatting"},
+   ["<C-d><C-w>"] = {"<cmd>:lua MiniTrailspace.trim()<CR>","Trim",nowait},
   },
-  i=
+  i =
   {
-   ["<C-S-j><C-S-k>"]={"<ESC>","Escape",nowait},
-   ["<C-S-s><C-S-d>"]={"<ESC>","Escape",nowait},
-   ["<C-b>"]={"<Home>","Beginning of line"},
-   ["<C-e>"]={"<End>","End of line"},
+   ["<C-S-j><C-S-k>"] = {"<ESC>","Escape",nowait},
+   ["<C-S-s><C-S-d>"] = {"<ESC>","Escape",nowait},
+   ["<C-b>"] = {"<Home>","Beginning of line"},
+   ["<C-e>"] = {"<End>","End of line"},
   },
-  v=
+  v =
   {
-   ["<C-S-j><C-S-k>"]={"<ESC>","Escape",nowait},
-   ["<C-S-s><C-S-d>"]={"<ESC>","Escape",nowait},
+   ["<C-S-j><C-S-k>"] = {"<ESC>","Escape",nowait},
+   ["<C-S-s><C-S-d>"] = {"<ESC>","Escape",nowait},
   },
  },
 }
